@@ -1,0 +1,47 @@
+Problem Set 5: Challenge-Personalized Database Design Scenario with Unique Constraints:
+
+Here's a personalized database design scenario based on your interest in managing a collection of songs.
+
+1. Define Your Unique Scenario:
+Imagine you are creating a database to track your favorite song and the singer who sing. The two tables could be:
+
+- Songs: Contains information about each Song.
+- Singer: Contains information about each Singer.
+
+The relationship between these two tables is that each song is sing by one artist, and an singer can compose multiple song.
+
+2. Apply Unique Constraints:
+To ensure data integrity and accuracy, we can apply unique constraints to the following fields:
+
+- Songs table: Ensure that each songs has a unique song_id.
+- Singer table: Ensure that each song_title is unique for each singer. For example, no two songs by the same singer can have the same title.
+
+Here's an SQL example to define the tables:
+
+
+CREATE TABLE Songs (
+    song_id NUMBER PRIMARY KEY,
+    song_title VARCHAR(255),
+    song_num NUMBER UNIQUE);
+
+CREATE TABLE Singer (
+    singer_id NUMBER,
+    singer_name VARCHAR(255),
+    song_id NUMBER,
+    UNIQUE (song_title, song_id),  -- Ensures no duplicate song titles per Singer
+    FOREIGN KEY (song_id) REFERENCES Songs(song_id)  
+);
+
+
+ 3. Alter the Structure:
+Suppose we want to add a year_released. We can use the 'ALTER' command to add this new column.
+
+
+ALTER TABLE Songs
+ADD COLUMN year_released NUMBER;
+
+
+ 4. Reflection:
+In this case, using foreign keys and unique constraints guarantees that: 
+- Accuracy:  no two songs by the same singer can have the same title, and no two singer can have the same 'song_id'. - Data Integrity: To avoid orphaned entries, a singer must always be associated with an active song thanks to the foreign key relationship. 
+- Easier Data Retrieval: Because each record in the singer table is uniquely recognized by both the title and the song, the  unique constraint enables more effective queries. In order to ensure consistency when retrieving information about songs and their singers, the foreign key makes it easier to link data from both tables. With low redundancy and excellent data integrity, this database design will assist in managing and organizing the song collection.
