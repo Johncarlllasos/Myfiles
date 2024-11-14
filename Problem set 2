@@ -1,0 +1,35 @@
+problem set 2:Custom Modifications Using ALTER Command:
+
+Scenario: teacher favorite.
+
+ 1. Add a New Column to Each Table
+
+fav_teacher: This table contains information about the favorite teacher.
+fav_subject: This table contains information about what subject is handle.
+
+
+fav_teacher Table: Add a column 'gender' to indicate whether a a teacher is male or female.
+
+fav_subject Table: Add a column 'level_handle' to know the grade level that has a subject that 
+
+SQL Commands for Adding Columns:
+- Adding has_vaccinations column to the fav_teacher table
+ALTER TABLE fav_teacher
+ADD Gender CHAR(1);
+
+- Adding adoption_date column to the fav_subject table
+ALTER TABLE fav_subject
+ADD level_handle NUMBER;
+
+
+ 2. Apply a Unique Constraint
+
+We will apply a unique constraint on the `special_subject` column in the  fav_subject table. This will ensure that each teacher has a unique subject
+
+ SQL Command for Unique Constraint:
+- Adding unique constraint to the adoption_date column
+ALTER TABLE fav_subject
+ADD CONSTRAINT unique_special_subject UNIQUE (special_subject);
+
+3: Reflection
+- To help avoid data duplication, the 'special_subject' column has a unique constraint that makes sure no two student are recorded on the same favorite. By keeping separate favorite subject, this improves the database's accuracy. This enhances the overall usability for tracking and reporting by giving users confidence that the data represents distinct favorite subject occurrences.
