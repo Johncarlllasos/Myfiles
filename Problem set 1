@@ -1,0 +1,58 @@
+1. Define Your Entities
+Scenario: Favorite Teachers and Their Subjects
+Entities: Teachers and Subjects
+
+Table: Teachers
+teacher_id (Primary Key, NUMBER)
+teacher_name (VARCHAR2(50), Unique)
+age (NUMBER)
+Table: Subjects
+subject_id (Primary Key, NUMBER)
+teacher_id (Foreign Key, NUMBER, references fav_teacher(teacher_id))
+subject_name (VARCHAR2(50))
+grade (NUMBER)
+
+2. Enforce a Unique Constraint
+fav_teacher table: The teacher_name column is unique because each teacher should have a unique name.
+fav_subject table: There is no need for a unique constraint in this case, as multiple teacher may have the same name.
+
+CREATE TABLE fav_teacher (
+    teacher_id NUMBER PRIMARY KEY,
+    teacher_name VARCHAR2(50) UNIQUE,
+    age NUMBER
+);
+
+3. Example Output
+
+CREATE TABLE fav_subject (
+    subject_id NUMBER PRIMARY KEY,
+    teacher_id NUMBER,
+    subject_name VARCHAR2(50),
+    grade NUMBER,
+    FOREIGN KEY (teacher_id) REFERENCES fav_teacher(teacher_id)
+);
+
+INSERT INTO fav_teacher (teacher_id, teacher_name, age)
+VALUES (1, 'Glenn Loreno', 43)
+    
+INSERT INTO fav_teacher (teacher_id, teacher_name, age)
+VALUES (2, 'Jocelyn Tadoy', 43);
+    
+INSERT INTO fav_teacher (teacher_id, teacher_name, age)
+VALUES(3, 'Aldren Conda', 36);
+
+
+INSERT INTO fav_subject (subject_id, teacher_id, subject_name, grade)
+VALUES(1, 1, 'Computer Programming', 90);
+
+INSERT INTO fav_subject (subject_id, teacher_id, subject_name, grade)
+VALUES(2, 2, 'General Mathematics', 93);
+
+INSERT INTO fav_subject (subject_id, teacher_id, subject_name, grade)
+VALUE((3, 3, 'Drafting', 92);
+
+
+4. Reflection
+* The fav_teacher table contains a unique entry for each teacher, identified by teacher_id and enforced by the unique constraint on teacher_name.
+* The fav_subject table establishes a relationship between subjects and their respective teachers through the teacher_id foreign key, ensuring data integrity and consistency.
+* This setup ensures that each teacher can be uniquely identified and that the subjects taught correspond directly to valid teachers.
