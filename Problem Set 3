@@ -1,0 +1,50 @@
+Problem Set 3: Personalized Duplicate Testing and Error Handling:
+
+
+Create and Test Duplicate
+
+  1.
+   CREATE TABLE student(
+    student_id NUMBER PRIMARY KEY,
+    student_name VARCHAR2(50),
+    LRN NUMBER UNIQUE);
+
+
+2. Insert Records with Unique Values: Add a few sample records with unique teacher_names to simulate new requests.
+
+  
+   INSERT INTO student (student_id, student_name,LRN)
+   VALUES (1, 'CARL', 11692120003);
+
+   INSERT INTO student (student_id, student_name,LRN)
+   VALUES (2, 'JEFFREY', 111692100003);
+   
+
+3. Attempt Duplicate Insertions: Now, attempt to insert a record with an LRN that 
+already exists in the database. This should trigger an error due to the unique constraint.
+
+   
+  INSERT INTO student (student_id, student_name,LRN)
+   VALUES (1, 'CARL', 11692120003);  Duplicate LRN
+   
+
+
+2: Observe and Document Errors
+
+- When trying to insert the duplicate record, Oracle will likely throw an error 
+similar to:
+  
+  
+  ORA-00001: unique constraint (SQL_TPHTSXJYRVYMKVGRNPYVTXVJH.SYS_C00173190037) violated ORA-06512: at "SYS.DBMS_SQL", line 1721
+  
+
+-  This message indicates that the unique constraint on 'student_LRN' has been 
+violated, meaning an LRN can appear only once in the table.
+
+
+
+ 3: Reflection
+
+- The " ORA-00001: unique constraint (SQL_TPHTSXJYRVYMKVGRNPYVTXVJH.SYS_C00173190037) violated ORA-06512: at "SYS.DBMS_SQL", line 1721" error happens when you attempt to enter a duplicate 
+value in a field that needs to be unique, such as the LRN of a student database applicant. 
+In order to ensure that each applicant has only one active application, unique constraints restrict duplicate data. When a duplicate is attempted to be added, the database automatically stops it and displays an error. This helps the adoption process go more easily by preventing confusion from duplicate entries and maintaining accurate and clean data.
